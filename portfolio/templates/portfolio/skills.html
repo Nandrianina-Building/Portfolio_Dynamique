@@ -1,0 +1,80 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %} Compétences {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/skills.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="skills-container animate-fade">
+    <div class="glass-card skill-category">
+        <h2><i class="fa-solid fa-code"></i> Frontend</h2>
+        <div class="skills-list">
+            {% for sf in frontend_tech %}
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name"><i class="{{ sf.icon_class }}"></i> {{ sf.name }}</span>
+                    <span class="skill-level">{{ sf.level }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: {{ sf.level }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="glass-card skill-category">
+        <h2><i class="fa-solid fa-server"></i> Backend</h2>
+        <div class="skills-list">
+            {% for sb in backend_tech %}
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name"><i class="{{ sb.icon_class }}"></i> {{ sb.name }}</span>
+                    <span class="skill-level">{{ sb.level }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: {{ sb.level }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="glass-card skill-category">
+        <h2><i class="fa-solid fa-database"></i> Base de données</h2>
+        <div class="skills-list">
+            {% for sd in database_tech %}
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name"><i class="{{ sd.icon_class }}"></i> {{ sd.name }}</span>
+                    <span class="skill-level">{{ sd.level }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: {{ sd.level }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="glass-card skill-category">
+        <h2><i class="fa-solid fa-tools"></i> Outils</h2>
+        <div class="skills-list">
+            {% for st in tool_tech %}
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name"><i class="{{ st.icon_class }}"></i> {{ st.name }}</span>
+                    <span class="skill-level">{{ st.level }}%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: {{ st.level }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

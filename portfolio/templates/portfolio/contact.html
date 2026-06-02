@@ -1,0 +1,76 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %} Contact {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="contact-grid animate-fade">
+    <section class="glass-card contact-info-section">
+        <h1>Contactez-moi</h1>
+        <p>Une idée de projet, une question ou une opportunité ? N'hésitez pas à m'écrire.</p>
+        
+        <div class="contact-cards">
+            {% if contact.email %}
+            <a class="contact-item-card glass-card" href="mailto:{{ contact.email }}">
+                <i class="fa-solid fa-envelope"></i>
+                <span>{{ contact.email }}</span>
+            </a>
+            {% endif %}
+            
+            {% if contact.phone %}
+            <a class="contact-item-card glass-card" href="tel:{{ contact.phone }}">
+                <i class="fa-solid fa-phone"></i>
+                <span>{{ contact.phone }}</span>
+            </a>
+            {% endif %}
+
+            {% if contact.facebook_url %}
+            <a class="contact-item-card glass-card" href="{{ contact.facebook_url }}" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-facebook"></i>
+                <span>Facebook</span>
+            </a>
+            {% endif %}
+
+            {% if contact.address %}
+            <div class="contact-item-card glass-card">
+                <i class="fa-solid fa-map-marker-alt"></i>
+                <span>{{ contact.address }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="glass-card">
+        <form action="" method="POST" class="contact-form">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div style="background: rgba(ef, 44, 44, 0.1); border: 1px solid #ef4444; color: #ef4444; padding: 12px; border-radius: 8px;">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                {{ form.subject.label_tag }}
+                {{ form.subject }}
+            </div>
+            <div class="form-group">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+            </div>
+            <button type="submit" class="btn-submit">Envoyer le message</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

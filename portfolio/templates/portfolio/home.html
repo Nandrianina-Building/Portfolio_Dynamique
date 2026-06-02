@@ -1,0 +1,56 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="bento-grid animate-fade">
+    <section class="glass-card profile-card">
+        <div class="profile-img-wrapper">
+            <img src="{{ presentation.photo.url }}" alt="Photo" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;" loading="lazy">
+        </div>
+        <div>
+            <h1>{{ presentation.title }}</h1>
+            <p class="subtitle">{{ presentation.subtitle }}</p>
+            <p class="desc">{{ presentation.description }}</p>
+        </div>
+    </section>
+
+    <div class="glass-card social-card">
+        <a href="{{ presentation.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fa-brands fa-facebook"></i> Facebook
+        </a>
+        <a href="{{ presentation.github_url }}" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fa-brands fa-github"></i> GitHub
+        </a>
+    </div>
+
+    <div class="glass-card actions-card">
+        <a href="{% url 'projects' %}" class="btn-bento primary">Voir les projets</a>
+        <a href="{% url 'contact' %}" class="btn-bento secondary">Me contacter</a>
+    </div>
+
+    <div class="glass-card tech-card">
+        <h3>Stack Technique Principale</h3>
+        <div class="tech-pills">
+            {% for t in tech %}
+                <span class="tech-pill">{{ t.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h2 class="services-heading">Mes Services</h2>
+
+    {% for service in services %}
+        <div class="glass-card service-card">
+            <i class="{{ service.icon_class }}"></i>
+            <h3>{{ service.service_name }}</h3>
+            <p>{{ service.description }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

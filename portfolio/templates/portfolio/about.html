@@ -1,0 +1,73 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %} À propos {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="animate-fade">
+    <div class="about-grid">
+        <section class="glass-card about-text">
+            <h1>À propos de moi</h1>
+            <p>{{ about.description_1 }}</p>
+            {% if about.description_2 %}
+                <p>{{ about.description_2 }}</p>
+            {% endif %} 
+            {% if about.description_3 %}
+                <p>{{ about.description_3 }}</p>
+            {% endif %}
+            <a href="{{ about.cv_url }}" target="_blank" rel="noopener noreferrer" class="cv-link">
+                <i class="fa-solid fa-download" style="margin-right: 8px;"></i> Télécharger mon CV
+            </a>
+        </section>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/vector-1743222526589-f29bb082bbf3?q=80&w=580&auto=format&fit=crop" alt="Illustration de présentation">
+        </div>
+    </div>
+
+    <div class="timeline-section">
+        <div class="timeline-container">
+            <div>
+                <h2 class="services-heading" style="margin-top:0;">Expérience</h2>
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    {% for exp in experience %} 
+                    <div class="glass-card timeline-card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <i class="fas fa-briefcase"></i>
+                            <span class="date">
+                                {{ exp.start_date|date:"M Y" }} - {% if exp.end_date %}{{ exp.end_date|date:"M Y" }}{% else %}Présent{% endif %}
+                            </span>
+                        </div>
+                        <h3>{{ exp.title }}</h3>
+                        <h4>{{ exp.company }}</h4>
+                        <p>{{ exp.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div>
+                <h2 class="services-heading" style="margin-top:0;">Éducation</h2>
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    {% for edu in education %} 
+                    <div class="glass-card timeline-card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="date">
+                                {{ edu.start_date|date:"M Y" }} - {% if edu.end_date %}{{ edu.end_date|date:"M Y" }}{% else %}Présent{% endif %}
+                            </span>
+                        </div>
+                        <h3>{{ edu.school }}</h3>
+                        <h4>{{ edu.diploma }}</h4>
+                        <p>{{ edu.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

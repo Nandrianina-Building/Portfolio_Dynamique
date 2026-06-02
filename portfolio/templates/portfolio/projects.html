@@ -1,0 +1,70 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %} Projets {% endblock %} 
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="projects-container animate-fade">
+    <h1>Mes Projets</h1>
+
+    <section class="projects-section">
+        <h2><i class="fa-regular fa-star"></i> Projets Vedettes</h2>
+        <div class="projects-grid">
+            {% for ft in featured_projects %}
+            <div class="glass-card project-card">
+                <div class="project-thumbnail-wrapper">
+                    <img src="{{ ft.thumbnail.url }}" alt="{{ ft.title }}" loading="lazy">
+                </div>
+                <div class="project-content">
+                    <h3>{{ ft.title }}</h3>
+                    <p>{{ ft.description }}</p>
+                    <div class="project-tech">
+                        {% for tech in ft.technologies.all %}
+                        <span class="project-tech-pill">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-actions">
+                        <a href="{{ ft.live_demo_url }}" target="_blank" rel="noopener noreferrer" class="project-btn primary">Live Demo</a>
+                        <a href="{{ ft.github_url }}" target="_blank" rel="noopener noreferrer" class="project-btn secondary">Code Source</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="color: var(--text-secondary);">Aucun projet vedette disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h2><i class="fa-solid fa-diagram-project"></i> Tous les Projets</h2>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="glass-card project-card">
+                <div class="project-thumbnail-wrapper">
+                    <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}" loading="lazy">
+                </div>
+                <div class="project-content">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description }}</p>
+                    <div class="project-tech">
+                        {% for tech in project.technologies.all %}
+                        <span class="project-tech-pill">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-actions">
+                        <a href="{{ project.live_demo_url }}" target="_blank" rel="noopener noreferrer" class="project-btn primary">Live Demo</a>
+                        <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="project-btn secondary">Code Source</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="color: var(--text-secondary);">Aucun projet disponible.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

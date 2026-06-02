@@ -1,0 +1,116 @@
+.projects-container h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 32px;
+}
+
+.projects-section {
+    margin-bottom: 48px;
+}
+
+.projects-section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+}
+
+.projects-section h2 i {
+    color: var(--accent);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.project-thumbnail-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border-card);
+}
+
+.project-thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-thumbnail-wrapper img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.project-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.project-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.project-tech-pill {
+    font-size: 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-card);
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+}
+
+.project-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.project-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid var(--border-card);
+}
+
+.project-btn.primary {
+    background: var(--text-primary);
+    color: var(--bg-main);
+    border: transparent;
+}
+
+.project-btn.primary:hover { background: #fff; }
+.project-btn.secondary:hover { background: rgba(255,255,255,0.05); border-color: var(--border-hover); }

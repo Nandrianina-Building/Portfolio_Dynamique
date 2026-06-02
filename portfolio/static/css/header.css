@@ -1,0 +1,94 @@
+header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 1200px;
+    height: 64px;
+    background: rgba(10, 10, 12, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-card);
+    border-radius: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    z-index: 1000;
+}
+
+header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(to right, #fff, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+
+header nav ul li a {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+header nav ul li a:hover, 
+header nav ul li a.active {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Menu Mobile Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+    header nav {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        width: 200px;
+        background: var(--bg-card);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-card);
+        border-radius: 16px;
+        padding: 16px;
+        display: none;
+    }
+
+    header nav.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+}
