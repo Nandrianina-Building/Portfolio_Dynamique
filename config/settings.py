@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-s+1dyan&@g%*nq*-q=iyl_1@o2+53i6mwb&ln@5ry1-aw5*^q+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -49,8 +49,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -82,7 +87,7 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "rnandriaina11@gmail.com"
 
-EMAIL_HOST_PASSWORD = "mot_de_passe_application"
+EMAIL_HOST_PASSWORD = "widjjpepfmcgxchv"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -129,6 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
