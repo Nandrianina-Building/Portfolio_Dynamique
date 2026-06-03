@@ -91,7 +91,7 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "rnandriaina11@gmail.com"
 
-EMAIL_HOST_PASSWORD = "widjjpepfmcgxchv"
+EMAIL_HOST_PASSWORD = "jhunpwfbkjsegdil"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
