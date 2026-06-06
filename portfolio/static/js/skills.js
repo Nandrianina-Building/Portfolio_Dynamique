@@ -1,108 +1,110 @@
 /* ============================================================
-   SKILLS.JS — Circular SVG ring animation · Stagger · Counter
+   SKILLS.JS — Line progress bars · Stagger · Counter · Glow
    ============================================================ */
 
 (function () {
   "use strict";
 
-  /* circumference = 2 * PI * r = 2 * 3.14159 * 40 ≈ 251.2 */
-  var CIRCUMFERENCE = 251.2;
-
-  /* ── 1. Animate ring fills when card enters viewport ──────── */
-  function initRings() {
-    var rings = document.querySelectorAll(".ring-fill[data-level]");
-    if (!rings.length) return;
+  /* ── 1. Animate fill + glow width on scroll ──────────────── */
+  function initBars() {
+    var fills = document.querySelectorAll(".skill-fill[data-level]");
+    var glows = document.querySelectorAll(".skill-glow[data-level]");
+    if (!fills.length) return;
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
 
-        var ring  = entry.target;
-        var level = parseInt(ring.dataset.level, 10) || 0;
-        var offset = CIRCUMFERENCE - (level / 100) * CIRCUMFERENCE;
+        var fill  = entry.target;
+        var level = parseInt(fill.dataset.level, 10) || 0;
+        var row   = fill.closest(".skill-row");
+        var glow  = row && row.querySelector(".skill-glow[data-level]");
 
-        /* slight delay so card reveal animation finishes first */
         setTimeout(function () {
-          ring.style.strokeDashoffset = offset;
-        }, 150);
+          fill.style.width = level + "%";
+          if (glow) glow.style.width = level + "%";
 
-        observer.unobserve(ring);
+          /* show tip dot after bar finishes */
+          setTimeout(function () {
+            fill.classList.add("animated");
+          }, 1000);
+        }, 100);
+
+        observer.unobserve(fill);
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.5 });
 
-    rings.forEach(function (ring) { observer.observe(ring); });
+    fills.forEach(function (f) { observer.observe(f); });
   }
 
-  /* ── 2. Stagger cards per grid on scroll ─────────────────── */
-  function initCardStagger() {
-    var grids = document.querySelectorAll(".skills-grid");
+  /* ── 2. Stagger rows per section on scroll ───────────────── */
+  function initRowStagger() {
+    var lists = document.querySelectorAll(".skills-list");
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        var cards = entry.target.querySelectorAll(".skill-card");
-        cards.forEach(function (card, i) {
-          setTimeout(function () { card.classList.add("visible"); }, i * 55);
+        var rows = entry.target.querySelectorAll(".skill-row");
+        rows.forEach(function (row, i) {
+          setTimeout(function () {
+            row.classList.add("visible");
+          }, i * 70);
         });
         observer.unobserve(entry.target);
       });
     }, { threshold: 0.05 });
 
-    grids.forEach(function (g) { observer.observe(g); });
+    lists.forEach(function (l) { observer.observe(l); });
   }
 
-  /* ── 3. Animated % counter in the ring centre ────────────── */
+  /* ── 3. Animated % counter synced to bar ─────────────────── */
   function initCounters() {
-    var cards = document.querySelectorAll(".skill-card");
+    var fills = document.querySelectorAll(".skill-fill[data-level]");
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
 
-        var card    = entry.target;
-        var pctEl   = card.querySelector(".skill-ring-pct");
-        var ringFill = card.querySelector(".ring-fill[data-level]");
-        if (!pctEl || !ringFill) return;
+        var fill   = entry.target;
+        var row    = fill.closest(".skill-row");
+        var pctEl  = row && row.querySelector(".skill-pct");
+        if (!pctEl) return;
 
-        var target   = parseInt(ringFill.dataset.level, 10) || 0;
+        var target   = parseInt(fill.dataset.level, 10) || 0;
         var start    = performance.now();
-        var duration = 1100;
+        var duration = 1000;
 
         (function tick(now) {
           var elapsed  = now - start;
           var progress = Math.min(elapsed / duration, 1);
-          /* ease-out cubic */
           var ease     = 1 - Math.pow(1 - progress, 3);
           pctEl.textContent = Math.round(target * ease) + "%";
           if (progress < 1) requestAnimationFrame(tick);
         })(start);
 
-        observer.unobserve(card);
+        observer.unobserve(fill);
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.5 });
 
-    cards.forEach(function (c) { observer.observe(c); });
+    fills.forEach(function (f) { observer.observe(f); });
   }
 
-  /* ── 4. Hover: pulse ring once ───────────────────────────── */
-  function initRingPulse() {
-    document.querySelectorAll(".skill-card").forEach(function (card) {
-      card.addEventListener("mouseenter", function () {
-        var ring = card.querySelector(".ring-fill");
-        if (!ring) return;
-        ring.style.transition = "stroke-dashoffset 0.3s ease, filter 0.25s ease";
-        /* tiny bounce: shrink offset then restore */
-        var current = parseFloat(ring.style.strokeDashoffset) || 0;
-        var bounce  = current + 8;
-        ring.style.strokeDashoffset = bounce;
-        setTimeout(function () {
-          ring.style.strokeDashoffset = current;
-        }, 160);
-      });
+  /* ── 4. Hover: brief fill pulse ──────────────────────────── */
+  function initHoverPulse() {
+    document.querySelectorAll(".skill-row").forEach(function (row) {
+      row.addEventListener("mouseenter", function () {
+        var fill = row.querySelector(".skill-fill");
+        if (!fill) return;
 
-      card.addEventListener("mouseleave", function () {
-        var ring = card.querySelector(".ring-fill");
-        if (ring) ring.style.transition = "";
+        var current = parseFloat(fill.style.width) || 0;
+        fill.style.transition = "width 0.15s ease";
+        fill.style.width = Math.min(current + 3, 100) + "%";
+
+        setTimeout(function () {
+          fill.style.transition = "width 0.25s ease";
+          fill.style.width = current + "%";
+          setTimeout(function () { fill.style.transition = ""; }, 260);
+        }, 160);
       });
     });
   }
@@ -131,10 +133,10 @@
 
   /* ── Init ────────────────────────────────────────────────── */
   function init() {
-    initRings();
-    initCardStagger();
+    initBars();
+    initRowStagger();
     initCounters();
-    initRingPulse();
+    initHoverPulse();
     initScrollSpy();
   }
 
