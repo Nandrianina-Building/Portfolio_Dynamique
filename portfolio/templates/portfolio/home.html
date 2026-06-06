@@ -1,56 +1,149 @@
 {% extends "portfolio/base.html" %}
 {% load static %}
 
-{% block title %} Accueil {% endblock %}
+{% block title %}{{ presentation.title }} — Portfolio{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="bento-grid animate-fade">
-    <section class="glass-card profile-card">
-        <div class="profile-img-wrapper">
-            <img src="{{ presentation.photo.url }}" alt="Photo" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;" loading="lazy">
-        </div>
-        <div>
-            <h1>{{ presentation.title }}</h1>
-            <p class="subtitle">{{ presentation.subtitle }}</p>
-            <p class="desc">{{ presentation.description }}</p>
-        </div>
-    </section>
 
-    <div class="glass-card social-card">
-        <a href="{{ presentation.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="social-link">
-            <i class="fa-brands fa-facebook"></i> Facebook
-        </a>
-        <a href="{{ presentation.github_url }}" target="_blank" rel="noopener noreferrer" class="social-link">
-            <i class="fa-brands fa-github"></i> GitHub
-        </a>
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+
+        <!-- Left: text -->
+        <div class="hero-text">
+            <div class="hero-badge reveal">
+                <span class="status-dot"></span>
+                <span>Open to opportunities</span>
+            </div>
+
+            <h1 class="hero-title reveal">
+                {{ presentation.title }}
+                <span class="hero-title-accent gradient-text">.</span>
+            </h1>
+
+            <p class="hero-subtitle reveal">{{ presentation.subtitle }}</p>
+            <p class="hero-description reveal">{{ presentation.description }}</p>
+
+            <!-- Tech stack chips -->
+            <div class="hero-stack reveal stagger">
+                {% for t in tech %}
+                <span class="tag">
+                    <i class="{{ t.icon_class }}"></i>
+                    {{ t.name }}
+                </span>
+                {% endfor %}
+            </div>
+
+            <!-- CTA buttons -->
+            <div class="hero-actions reveal">
+                <a href="{% url 'projects' %}" class="btn btn-primary">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    View Projects
+                </a>
+                <a href="{% url 'contact' %}" class="btn btn-ghost">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Contact me
+                </a>
+                <a href="{{ presentation.github_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="{{ presentation.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right: avatar -->
+        <div class="hero-avatar-wrap reveal">
+            <div class="hero-avatar-ring" aria-hidden="true"></div>
+            <div class="hero-avatar-ring hero-avatar-ring--2" aria-hidden="true"></div>
+            <div class="hero-avatar">
+                <img
+                    src="{{ presentation.photo.url }}"
+                    alt="Photo de {{ presentation.title }}"
+                    loading="eager"
+                    class="hero-avatar-img"
+                />
+            </div>
+            <!-- Floating badges -->
+            <div class="float-badge float-badge--tl">
+                <i class="fa-solid fa-code"></i>
+                <span>Full-Stack</span>
+            </div>
+            <div class="float-badge float-badge--br">
+                <i class="fa-solid fa-star"></i>
+                <span>5+ Projects</span>
+            </div>
+        </div>
     </div>
 
-    <div class="glass-card actions-card">
-        <a href="{% url 'projects' %}" class="btn-bento primary">Voir les projets</a>
-        <a href="{% url 'contact' %}" class="btn-bento secondary">Me contacter</a>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
     </div>
+</section>
 
-    <div class="glass-card tech-card">
-        <h3>Stack Technique Principale</h3>
-        <div class="tech-pills">
-            {% for t in tech %}
-                <span class="tech-pill">{{ t.name }}</span>
+<!-- ══ SERVICES ══════════════════════════════════════════════ -->
+<section class="services-section section" id="services">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-label">What I do</span>
+            <h2 class="section-title">
+                Services &amp; <span class="gradient-text">Expertise</span>
+            </h2>
+        </div>
+
+        <div class="services-grid stagger">
+            {% for service in services %}
+            <article class="service-card card reveal">
+                <div class="service-icon-wrap">
+                    <i class="{{ service.icon_class }}"></i>
+                </div>
+                <h3 class="service-title">{{ service.service_name }}</h3>
+                <p class="service-desc">{{ service.description }}</p>
+                <div class="service-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </article>
             {% endfor %}
         </div>
     </div>
+</section>
 
-    <h2 class="services-heading">Mes Services</h2>
-
-    {% for service in services %}
-        <div class="glass-card service-card">
-            <i class="{{ service.icon_class }}"></i>
-            <h3>{{ service.service_name }}</h3>
-            <p>{{ service.description }}</p>
+<!-- ══ STATS BAND ════════════════════════════════════════════ -->
+<div class="stats-band">
+    <div class="container stats-grid">
+        <div class="stat-item reveal">
+            <span class="stat-number" data-target="5">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Projects delivered</span>
         </div>
-    {% endfor %}
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item reveal">
+            <span class="stat-number" data-target="2">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Years experience</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item reveal">
+            <span class="stat-number" data-target="10">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Technologies</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item reveal">
+            <span class="stat-number" data-target="100">0</span><span class="stat-plus">%</span>
+            <span class="stat-label">Commitment</span>
+        </div>
+    </div>
 </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}
