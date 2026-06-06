@@ -1,29 +1,53 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Portfolio {% endblock %}</title>
+    <title>{% block title %}Portfolio{% endblock %}</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <link rel="icon" href="{% static 'img/favicons.png' %}">
+
+    <!-- Base CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-    
+
+    <!-- Page-specific CSS -->
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <!-- Noise overlay for texture -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <!-- Ambient background blobs -->
+    <div class="bg-ambient" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Header -->
     {% include "partials/header.html" %}
-    <main>
-        {% block content %}
-        {% endblock %}
+
+    <!-- Main content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
     </main>
+
+    <!-- Footer -->
     {% include "partials/footer.html" %}
 
-    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Base JS -->
+    <script src="{% static 'js/base.js' %}"></script>
+
+    <!-- Page-specific JS -->
+    {% block extra_js %}{% endblock %}
 </body>
 </html>
