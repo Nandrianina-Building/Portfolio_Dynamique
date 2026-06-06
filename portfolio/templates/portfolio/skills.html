@@ -29,26 +29,21 @@
       <span class="section-label"><i class="fa-solid fa-code"></i> Client side</span>
       <h2 class="section-title">Frontend <span class="gradient-text">Stack</span></h2>
     </div>
-    <div class="skills-grid">
+    <div class="skills-list">
       {% for sf in frontend_tech %}
-      <article class="skill-card reveal" data-category="frontend">
-        <div class="skill-ring-wrap">
-          <svg class="skill-ring" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-track" cx="50" cy="50" r="40"/>
-            <circle class="ring-fill ring-fill--frontend" cx="50" cy="50" r="40"
-              data-level="{{ sf.level }}"
-              stroke-dasharray="251.2"
-              stroke-dashoffset="251.2"/>
-          </svg>
-          <div class="skill-ring-inner">
+      <div class="skill-row reveal">
+        <div class="skill-meta">
+          <div class="skill-icon-wrap skill-icon--frontend">
             <i class="{{ sf.icon_class }}"></i>
-            <span class="skill-ring-pct">{{ sf.level }}%</span>
           </div>
-        </div>
-        <div class="skill-label">
           <span class="skill-name">{{ sf.name }}</span>
+          <span class="skill-pct skill-pct--frontend">{{ sf.level }}%</span>
         </div>
-      </article>
+        <div class="skill-track" role="progressbar" aria-valuenow="{{ sf.level }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ sf.name }}">
+          <div class="skill-fill skill-fill--frontend" data-level="{{ sf.level }}"></div>
+          <div class="skill-glow skill-glow--frontend" data-level="{{ sf.level }}"></div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -61,90 +56,75 @@
       <span class="section-label"><i class="fa-solid fa-server"></i> Server side</span>
       <h2 class="section-title">Backend <span class="gradient-text">Stack</span></h2>
     </div>
-    <div class="skills-grid">
+    <div class="skills-list">
       {% for sb in backend_tech %}
-      <article class="skill-card reveal" data-category="backend">
-        <div class="skill-ring-wrap">
-          <svg class="skill-ring" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-track" cx="50" cy="50" r="40"/>
-            <circle class="ring-fill ring-fill--backend" cx="50" cy="50" r="40"
-              data-level="{{ sb.level }}"
-              stroke-dasharray="251.2"
-              stroke-dashoffset="251.2"/>
-          </svg>
-          <div class="skill-ring-inner">
+      <div class="skill-row reveal">
+        <div class="skill-meta">
+          <div class="skill-icon-wrap skill-icon--backend">
             <i class="{{ sb.icon_class }}"></i>
-            <span class="skill-ring-pct">{{ sb.level }}%</span>
           </div>
-        </div>
-        <div class="skill-label">
           <span class="skill-name">{{ sb.name }}</span>
+          <span class="skill-pct skill-pct--backend">{{ sb.level }}%</span>
         </div>
-      </article>
+        <div class="skill-track" role="progressbar" aria-valuenow="{{ sb.level }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ sb.name }}">
+          <div class="skill-fill skill-fill--backend" data-level="{{ sb.level }}"></div>
+          <div class="skill-glow skill-glow--backend" data-level="{{ sb.level }}"></div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- ══ DATABASE ═══════════════════════════════════════════════ -->
+<!-- ══ DATABASE ══════════════════════════════════════════════ -->
 <section class="skills-section section" id="database">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label"><i class="fa-solid fa-database"></i> Storage</span>
       <h2 class="section-title">Database <span class="gradient-text">Stack</span></h2>
     </div>
-    <div class="skills-grid">
+    <div class="skills-list">
       {% for sd in database_tech %}
-      <article class="skill-card reveal" data-category="db">
-        <div class="skill-ring-wrap">
-          <svg class="skill-ring" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-track" cx="50" cy="50" r="40"/>
-            <circle class="ring-fill ring-fill--db" cx="50" cy="50" r="40"
-              data-level="{{ sd.level }}"
-              stroke-dasharray="251.2"
-              stroke-dashoffset="251.2"/>
-          </svg>
-          <div class="skill-ring-inner">
+      <div class="skill-row reveal">
+        <div class="skill-meta">
+          <div class="skill-icon-wrap skill-icon--db">
             <i class="{{ sd.icon_class }}"></i>
-            <span class="skill-ring-pct">{{ sd.level }}%</span>
           </div>
-        </div>
-        <div class="skill-label">
           <span class="skill-name">{{ sd.name }}</span>
+          <span class="skill-pct skill-pct--db">{{ sd.level }}%</span>
         </div>
-      </article>
+        <div class="skill-track" role="progressbar" aria-valuenow="{{ sd.level }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ sd.name }}">
+          <div class="skill-fill skill-fill--db" data-level="{{ sd.level }}"></div>
+          <div class="skill-glow skill-glow--db" data-level="{{ sd.level }}"></div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- ══ TOOLS ══════════════════════════════════════════════════ -->
+<!-- ══ TOOLS ═════════════════════════════════════════════════ -->
 <section class="skills-section section" id="tools">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label"><i class="fa-solid fa-wrench"></i> Workflow</span>
       <h2 class="section-title">Tools &amp; <span class="gradient-text">DevOps</span></h2>
     </div>
-    <div class="skills-grid">
+    <div class="skills-list">
       {% for st in tool_tech %}
-      <article class="skill-card reveal" data-category="tool">
-        <div class="skill-ring-wrap">
-          <svg class="skill-ring" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-track" cx="50" cy="50" r="40"/>
-            <circle class="ring-fill ring-fill--tool" cx="50" cy="50" r="40"
-              data-level="{{ st.level }}"
-              stroke-dasharray="251.2"
-              stroke-dashoffset="251.2"/>
-          </svg>
-          <div class="skill-ring-inner">
+      <div class="skill-row reveal">
+        <div class="skill-meta">
+          <div class="skill-icon-wrap skill-icon--tool">
             <i class="{{ st.icon_class }}"></i>
-            <span class="skill-ring-pct">{{ st.level }}%</span>
           </div>
-        </div>
-        <div class="skill-label">
           <span class="skill-name">{{ st.name }}</span>
+          <span class="skill-pct skill-pct--tool">{{ st.level }}%</span>
         </div>
-      </article>
+        <div class="skill-track" role="progressbar" aria-valuenow="{{ st.level }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ st.name }}">
+          <div class="skill-fill skill-fill--tool" data-level="{{ st.level }}"></div>
+          <div class="skill-glow skill-glow--tool" data-level="{{ st.level }}"></div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
