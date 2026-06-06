@@ -1,91 +1,364 @@
+/* ============================================================
+   CONTACT.CSS — Page hero · Info panel · Form
+   ============================================================ */
+
+/* ══ PAGE HERO ═══════════════════════════════════════════════ */
+
+.page-hero {
+  padding-top: calc(var(--header-height) + var(--space-2xl));
+  padding-bottom: var(--space-xl);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.page-hero-title {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.page-hero-desc {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+/* ══ CONTACT SECTION ═════════════════════════════════════════ */
+
+.contact-section {
+  position: relative;
+  z-index: 2;
+}
+
+/* Two-column layout */
 .contact-grid {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 420px) 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
 }
 
-.contact-info-section h1 { font-size: 2.5rem; margin-bottom: 12px; letter-spacing: -1px; }
-.contact-info-section > p { color: var(--text-secondary); margin-bottom: 24px; }
+/* ══ LEFT INFO PANEL ══════════════════════════════════════════ */
 
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-lg));
+}
+
+/* Availability badge */
+.contact-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-green);
+  width: fit-content;
+}
+
+.contact-info-title {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.contact-info-desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* ── Contact Cards ──────────────────────────────────────────── */
 .contact-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-.contact-item-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition:
+    background var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
 }
 
-.contact-item-card i {
-    font-size: 1.2rem;
-    color: var(--accent);
-    width: 44px;
-    height: 44px;
-    background: var(--accent-glow);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.contact-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm), 0 0 16px var(--accent-glow);
 }
 
-.contact-item-card span { font-size: 0.95rem; font-weight: 500; }
+.contact-card-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  background: rgba(79, 142, 247, 0.1);
+  border: 1px solid rgba(79, 142, 247, 0.15);
+  color: var(--accent-primary);
+  transition: transform var(--duration-base) var(--ease-out);
+}
 
-/* Styles Formulaire */
+.contact-card:hover .contact-card-icon { transform: scale(1.1) rotate(-5deg); }
+
+.contact-card-icon--phone {
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.15);
+  color: var(--accent-green);
+}
+
+.contact-card-icon--location {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.15);
+  color: var(--accent-secondary);
+}
+
+.contact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-card-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-card-value {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-card-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition:
+    color var(--duration-base),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.contact-card:hover .contact-card-arrow {
+  color: var(--accent-primary);
+  transform: translateX(3px);
+}
+
+/* ── Socials ────────────────────────────────────────────────── */
+.contact-socials {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* .social-btn styles inherited from footer.css / base */
+
+/* ══ RIGHT: FORM ══════════════════════════════════════════════ */
+
+.contact-form-wrap { min-width: 0; }
+
+.contact-form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ── Form Alerts ────────────────────────────────────────────── */
+.form-messages { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.form-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.form-alert--success {
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  color: var(--accent-green);
+}
+
+.form-alert--error {
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  color: #f87171;
+}
+
+/* ── Form layout ────────────────────────────────────────────── */
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.form-group label {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-secondary);
+/* Labels */
+.form-group label,
+.form-group .label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
 }
 
-/* Gestion des inputs HTML standards générés par les formulaires Django */
-.form-group input, 
-.form-group textarea {
+/* Inputs / Textarea — override Django defaults */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  outline: none;
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out);
+  appearance: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.12);
+  background: var(--bg-card);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Error state */
+.contact-form input.error,
+.contact-form textarea.error {
+  border-color: #f87171;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.1);
+}
+
+.field-error {
+  font-size: var(--text-xs);
+  color: #f87171;
+  margin-top: 2px;
+}
+
+/* ── Submit Button ──────────────────────────────────────────── */
+.contact-submit {
+  align-self: flex-start;
+  padding: 14px 32px;
+  font-size: var(--text-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-loading {
+  display: none;
+  margin-left: 4px;
+}
+
+.contact-submit.loading .fa-paper-plane { display: none; }
+.contact-submit.loading .btn-loading    { display: inline; }
+
+/* ══ RESPONSIVE ══════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .contact-info {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-card {
+    padding: var(--space-lg);
+  }
+
+  .contact-submit {
     width: 100%;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border-card);
-    border-radius: 10px;
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
+    justify-content: center;
+  }
 
-.form-group input:focus, 
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-    box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.btn-submit {
-    background: var(--text-primary);
-    color: var(--bg-main);
-    padding: 14px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-top: 8px;
-}
-
-.btn-submit:hover { background: #fff; box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
-
-@media(max-width: 768px) {
-    .contact-grid { grid-template-columns: 1fr; }
+  .page-hero-desc { max-width: 100%; }
 }
