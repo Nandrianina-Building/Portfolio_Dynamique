@@ -1,17 +1,96 @@
-<header>
-    <h2>Portfolio</h2>
-    <div class="menu-toggle" id="mobile-menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
+<header class="site-header" id="site-header">
+    <div class="header-inner container">
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="header-logo" aria-label="Home">
+            <span class="logo-icon">
+                <i class="fa-solid fa-terminal"></i>
+            </span>
+            <span class="logo-text">Portfolio</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="header-nav" aria-label="Main navigation">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="{% url 'home' %}" class="nav-link">
+                        <i class="fa-solid fa-house-chimney"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'about' %}" class="nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'projects' %}" class="nav-link">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'skills' %}" class="nav-link">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Skills</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'contact' %}" class="nav-link nav-link-cta">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span class="ham-line"></span>
+            <span class="ham-line"></span>
+            <span class="ham-line"></span>
+        </button>
     </div>
-    <nav id="nav-menu">
-        <ul>
-            <li><a href="{% url 'home' %}">Accueil</a></li>
-            <li><a href="{% url 'about' %}">À propos</a></li>
-            <li><a href="{% url 'projects' %}">Projets</a></li>
-            <li><a href="{% url 'skills' %}">Compétences</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-        </ul>
-    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <nav aria-label="Mobile navigation">
+            <ul class="mobile-nav-list">
+                <li>
+                    <a href="{% url 'home' %}" class="mobile-nav-link">
+                        <i class="fa-solid fa-house-chimney"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'about' %}" class="mobile-nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'projects' %}" class="mobile-nav-link">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'skills' %}" class="mobile-nav-link">
+                        <i class="fa-solid fa-code"></i>
+                        Skills
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}" class="mobile-nav-link mobile-cta">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </header>
+
+<!-- Overlay -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
