@@ -84,7 +84,7 @@
       <!-- Socials -->
       <div class="contact-socials reveal">
         <a href="{{ contact.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
-          <i class="fa-brands fa-linkedin-in"></i>
+          <i class="fa-brands fa-whatsApp"></i>
         </a>
         <a href="{{ contact.github_url }}" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
           <i class="fa-brands fa-github"></i>
@@ -95,76 +95,6 @@
       </div>
 
     </aside>
-
-    <!-- ── Right: Form ─────────────────────────────────────── -->
-    <div class="contact-form-wrap reveal">
-      <div class="contact-form-card">
-
-        {% if messages %}
-        <div class="form-messages">
-          {% for message in messages %}
-          <div class="form-alert form-alert--{{ message.tags }}">
-            <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"></i>
-            {{ message }}
-          </div>
-          {% endfor %}
-        </div>
-        {% endif %}
-
-        {% if form.non_field_errors %}
-        <div class="form-alert form-alert--error">
-          <i class="fa-solid fa-circle-exclamation"></i>
-          {{ form.non_field_errors }}
-        </div>
-        {% endif %}
-
-        <form action="" method="POST" class="contact-form" id="contact-form" novalidate>
-          {% csrf_token %}
-
-          <div class="form-row">
-            <div class="form-group">
-              {{ form.name.label_tag }}
-              {{ form.name }}
-              {% if form.name.errors %}
-              <span class="field-error">{{ form.name.errors|join:", " }}</span>
-              {% endif %}
-            </div>
-            <div class="form-group">
-              {{ form.email.label_tag }}
-              {{ form.email }}
-              {% if form.email.errors %}
-              <span class="field-error">{{ form.email.errors|join:", " }}</span>
-              {% endif %}
-            </div>
-          </div>
-
-          <div class="form-group">
-            {{ form.subject.label_tag }}
-            {{ form.subject }}
-            {% if form.subject.errors %}
-            <span class="field-error">{{ form.subject.errors|join:", " }}</span>
-            {% endif %}
-          </div>
-
-          <div class="form-group">
-            {{ form.message.label_tag }}
-            {{ form.message }}
-            {% if form.message.errors %}
-            <span class="field-error">{{ form.message.errors|join:", " }}</span>
-            {% endif %}
-          </div>
-
-          <button type="submit" class="btn btn-primary contact-submit" id="submit-btn">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>Send Message</span>
-            <span class="btn-loading" aria-hidden="true">
-              <i class="fa-solid fa-spinner fa-spin"></i>
-            </span>
-          </button>
-
-        </form>
-      </div>
-    </div>
 
   </div>
 </section>
